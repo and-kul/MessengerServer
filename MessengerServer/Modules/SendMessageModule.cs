@@ -42,6 +42,8 @@ namespace MessengerServer.Modules
                     };
 
                     db.Messages.Add(message);
+                    chat.LastMessage = message;
+                   
                     db.SaveChanges();
 
                     return HttpStatusCode.OK;
