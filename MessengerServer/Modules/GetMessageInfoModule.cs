@@ -39,7 +39,7 @@ namespace MessengerServer.Modules
                         ChatId = message.ChatId,
                         FromUserId = fromUser.Id,
                         FromUserName = fromUser.GetFullNameOrLogin(),
-                        SentTime = message.SentTime.ToUniversalTime().ToBinary()
+                        SentTime = message.SentTime.ToBinary()
                     };
 
                     return result;
