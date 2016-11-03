@@ -36,7 +36,7 @@ namespace MessengerServer.Modules
                     {
                         var secondUser = chat.Users.FirstOrDefault(u => u.Id != user.Id);
 
-                        name = secondUser.GetFullNameOrLogin();
+                        name = secondUser == null ? user.GetFullNameOrLogin() : secondUser.GetFullNameOrLogin();
                     }
 
                     var result = new
