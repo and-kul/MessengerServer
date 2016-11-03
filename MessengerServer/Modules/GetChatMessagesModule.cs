@@ -6,15 +6,16 @@ using Nancy.Security;
 
 namespace MessengerServer.Modules
 {
-    public class GetChatInfoModule : NancyModule
+    public class GetChatMessagesModule : NancyModule
     {
-        public GetChatInfoModule()
+        public GetChatMessagesModule()
         {
             this.RequiresAuthentication();
 
-            Post["/getchatinfo/{chat_id:int}"] = parameters =>
+            Post["/getchatmessages/{chat_id:int}/{start_message_id?0}"] = parameters =>
             {
                 int chatId = parameters["chat_id"];
+                long startMessageId = parameters["start_message_id"];
 
                 var userId = ((Identity) Context.CurrentUser).Id;
 
@@ -29,23 +30,10 @@ namespace MessengerServer.Modules
                     if (!chat.Users.Contains(user))
                         return HttpStatusCode.Forbidden;
 
-                    string name;
-                    if (chat.IsGroup)
-                        name = chat.Name;
-                    else
-                    {
-                        var secondUser = chat.Users.FirstOrDefault(u => u.Id != user.Id);
-
-                        name = secondUser.GetFullNameOrLogin();
-                    }
-
-                    var result = new
-                    {
-                        ChatId = chatId,
-                        Name = name,
-                        LastMessageId = chat.LastMessageId
-                    };
-
+                    var result = chat.Messages
+                        .Where(m => m.Id > startMessageId)
+                        .OrderBy(m => m.Id)
+                        .Select(m => m.Id);
 
                     return result;
                 }

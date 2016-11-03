@@ -21,6 +21,13 @@ namespace MessengerServer.Models
         public string LastName { get; set; }
 
         public virtual ICollection<Chat> Chats { get; set; } = new List<Chat>();
+
+
+        public string GetFullNameOrLogin()
+        {
+            var fullName = FirstName + " " + LastName;
+            return string.IsNullOrEmpty(fullName) ? Login : fullName;
+        }
     }
 
 }
