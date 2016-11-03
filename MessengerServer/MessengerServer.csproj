@@ -103,6 +103,7 @@
     <Compile Include="Models\Secret.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Modules\GetChatUsersModule.cs" />
+    <Compile Include="Modules\NewPrivateChatModule.cs" />
     <Compile Include="Modules\SendMessageModule.cs" />
     <Compile Include="Modules\GetMessageContentModule.cs" />
     <Compile Include="Modules\GetChatInfoModule.cs" />
