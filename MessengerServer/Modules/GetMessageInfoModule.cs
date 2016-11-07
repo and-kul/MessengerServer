@@ -1,4 +1,5 @@
-﻿using MessengerServer.Models;
+﻿using System;
+using MessengerServer.Models;
 using MessengerServer.Security;
 using Nancy;
 using Nancy.Security;
@@ -39,7 +40,7 @@ namespace MessengerServer.Modules
                         ChatId = message.ChatId,
                         FromUserId = fromUser.Id,
                         FromUserName = fromUser.GetFullNameOrLogin(),
-                        SentTime = message.SentTime.ToBinary()
+                        SentTime = (long)message.SentTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds
                     };
 
                     return result;
