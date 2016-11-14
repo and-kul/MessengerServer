@@ -26,7 +26,7 @@ namespace MessengerServer.Models
         public string GetFullNameOrLogin()
         {
             var fullName = FirstName + " " + LastName;
-            return string.IsNullOrEmpty(fullName) ? Login : fullName;
+            return fullName == " " ? Login : fullName;
         }
     }
 
