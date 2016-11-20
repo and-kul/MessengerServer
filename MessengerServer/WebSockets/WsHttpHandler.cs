@@ -15,7 +15,9 @@ namespace MessengerServer.WebSockets
         {
             if (context.IsWebSocketRequest || context.IsWebSocketRequestUpgrading)
             {
-                var jwtToken = context.Request.Cookies["Authorization"]?.Value;
+                var path = context.Request.Path;
+
+                var jwtToken = path.Substring(path.LastIndexOf("/") + 1);
 
                 Identity identity;
 
