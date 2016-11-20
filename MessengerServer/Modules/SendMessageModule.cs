@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MessengerServer.Models;
 using MessengerServer.Security;
+using MessengerServer.WebSockets;
 using Nancy;
 using Nancy.Security;
+using Newtonsoft.Json;
 
 namespace MessengerServer.Modules
 {
@@ -45,6 +48,23 @@ namespace MessengerServer.Modules
                     chat.LastMessage = message;
                    
                     db.SaveChanges();
+
+                    Task.Run(() =>
+                    {
+                        foreach (var userInChat in chat.Users)
+                        {
+                            SubscribeWebSocket webSocket;
+                            var socketExists = Connections.WebSockets.TryGetValue(userInChat.Id,
+                                out webSocket);
+
+                            if (socketExists)
+                            {
+                                webSocket.Send(JsonConvert.SerializeObject(new {chatId}));
+                            }
+
+                        }
+                    });
+
 
                     return HttpStatusCode.OK;
                 }

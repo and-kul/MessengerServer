@@ -14,7 +14,7 @@
     <RootNamespace>MessengerServer</RootNamespace>
     <AssemblyName>MessengerServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -57,6 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WebSockets, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WebSockets.0.2.3.1\lib\net45\Microsoft.WebSockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nancy, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nancy.1.4.3\lib\net40\Nancy.dll</HintPath>
       <Private>True</Private>
@@ -118,6 +122,9 @@
     <Compile Include="Security\SimpleUser.cs" />
     <Compile Include="Security\JwtToken.cs" />
     <Compile Include="Security\Identity.cs" />
+    <Compile Include="WebSockets\Connections.cs" />
+    <Compile Include="WebSockets\SubscribeWebSocket.cs" />
+    <Compile Include="WebSockets\WsHttpHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -150,7 +157,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63951</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8080/</IISUrl>
+          <IISUrl>http://localhost/MessengerServer</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
