@@ -12,8 +12,8 @@ namespace MessengerServer
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
-        protected override DiagnosticsConfiguration DiagnosticsConfiguration
-            => new DiagnosticsConfiguration {Password = @"Innopolis"};
+        //protected override DiagnosticsConfiguration DiagnosticsConfiguration
+        //    => new DiagnosticsConfiguration {Password = @"Innopolis"};
 
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
@@ -30,28 +30,9 @@ namespace MessengerServer
             };
 
 
-            StaticConfiguration.EnableRequestTracing = true;
-            StaticConfiguration.DisableErrorTraces = false;
-
-            //pipelines.OnError += (ctx, ex) =>
-            //{
-            //    var response = new Response
-            //    {
-            //        StatusCode = HttpStatusCode.InternalServerError,
-            //        ContentType = "text/text",
-            //        Contents = stream =>
-            //        {
-            //            using (var writer = new StreamWriter(stream))
-            //            {
-            //                writer.Write(ex);
-            //            }
-            //        }
-            //    };
-
-            //    return response;
-            //};
-
-
+            //StaticConfiguration.EnableRequestTracing = true;
+            //StaticConfiguration.DisableErrorTraces = false;
+            
             var configuration =
                 new StatelessAuthenticationConfiguration(ctx =>
                 {
